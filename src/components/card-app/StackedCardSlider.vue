@@ -70,7 +70,7 @@ const onPointerMove = (event: PointerEvent) => {
 
   event.preventDefault();
   deltaY.value = event.clientY - startY;  
-  const flag = !onceSlided && Math.sign(deltaY.value) < 0 ? props.cardHeight + (stackGap.value / 2) - 50 : stackGap.value;
+  const flag = !onceSlided && Math.sign(deltaY.value) < 0 ? props.cardHeight + (stackGap.value / 2) : stackGap.value;
   const offset = Math.abs(deltaY.value) >= flag ? Math.sign(deltaY.value) : 0;
   const targetIndex = currentIndex - offset;
   directionOfMomentAgo.value = targetIndex === currentIndex ? 'none' : targetIndex > currentIndex ? 'up' : 'down';
@@ -107,7 +107,7 @@ const getCardStyle = (index: number): CSSProperties => {
   const isDragging = dragIndex.value === index;
   let top = (items.value.length - 1 - index) * stackGap.value + (isDragging ? deltaY.value : 0);
   if (isDragging && onceSlided.value && directionOfMomentAgo.value === 'up') {    
-    top = deltaY.value + ((items.value.length - index) * stackGap.value) - (props.cardHeight + (stackGap.value / 2) - 50);
+    top = deltaY.value + ((items.value.length - index) * stackGap.value) - (props.cardHeight + (stackGap.value / 2));
   }
   return {
     top: `${top}px`,
