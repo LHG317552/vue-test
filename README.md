@@ -1,5 +1,5 @@
-# Vue 3 + Vite
+# Vue-Test
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- Vue.js 프로젝트에 사용할 UI 컴포넌트 프로토타입 개발을 위한 연습사이트
+- 업무 혹은 테마별로 메뉴 분리
+- 일종의 캔버스로 활용되는 프로젝트
