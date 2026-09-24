@@ -52,7 +52,7 @@
   }
   
   .eyebrow { margin: 0 0 8px; color: #2862bf; font-size: 12px; font-weight: 800; letter-spacing: 1.4px; }
-  h1 { margin: 0; font-size: 32px; letter-spacing: -1.5px; }
+  h1 { margin: 0; font-size: 24px; letter-spacing: -1.5px; color: #1d2a44; }
   .description { margin: 12px 0 30px; color: #66758a; line-height: 1.55; }
   .page-list { display: grid; gap: 12px; margin-bottom: 1rem; }
   .page-link { display: flex; align-items: center; gap: 14px; padding: 18px; border: 1px solid #e2e9f5; border-radius: 16px; color: inherit; text-decoration: none; transition: border-color .2s, box-shadow .2s, transform .2s; }
