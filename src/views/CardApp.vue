@@ -1,7 +1,7 @@
 <template>
   <div class="wallet-container">
     <header class="app-header">
-      <div class="brand-lockup"><span class="brand-mark">i</span><strong>IBK 카드</strong></div>
+      <div class="brand-lockup"><span class="brand-mark">i</span><strong>카드앱</strong></div>
       <div class="header-actions">
         <button class="icon-button" type="button" aria-label="알림">♧<span class="notification-dot"></span></button>
         <button class="icon-button" type="button" aria-label="전체 메뉴">☰</button>
@@ -61,8 +61,8 @@
         </div>
       </section>
       <section class="event-banner">
-        <div><span>IBK 카드 혜택</span><strong>나에게 딱 맞는<br />이번 달 혜택을 확인하세요</strong></div>
-        <span class="banner-card">IBK</span>
+        <div><span>카드 혜택</span><strong>나에게 딱 맞는<br />이번 달 혜택을 확인하세요</strong></div>
+        <span class="banner-card">카드앱</span>
       </section>
     </template>
     <nav v-if="!isEditMode" class="bottom-nav" aria-label="하단 메뉴">
