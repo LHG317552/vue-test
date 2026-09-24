@@ -92,7 +92,7 @@
     gradient: string
   }
   const router = useRouter();
-  const height = ref<number>(window.innerHeight - 350);
+  const height = ref<number>(500);
   const swiperModules = [Pagination]
   const isEditMode = ref(false)
   
