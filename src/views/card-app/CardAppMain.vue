@@ -41,7 +41,7 @@
       </div>
   
       <!-- 2. 순서변경 모드 (세로 Stacked 롱프레스 드래그) -->
-      <StackedCardSlider v-else v-model="cards" :height="height" :card-height="210">
+      <StackedCardSlider v-else v-model="cards" :height="height" :card-height="200">
         <template #default="{ card }">
           <div class="pay-card" :style="{ background: card.gradient }">      
             <div class="card-brand">{{ card.brand }}</div>
@@ -92,7 +92,7 @@
     gradient: string
   }
   const router = useRouter();
-  const height = ref<number>(500);
+  const height = ref<number>(window.innerHeight - 300);
   const swiperModules = [Pagination]
   const isEditMode = ref(false)
   
@@ -182,7 +182,7 @@
   }
   
   .pay-card {
-    height: 210px;
+    height: 200px;
     border-radius: 20px;
     padding: 24px;
     position: relative;
