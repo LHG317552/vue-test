@@ -26,7 +26,7 @@ import { ref } from 'vue';
 import {  useRouter } from 'vue-router'
     
  const routers = useRouter().getRoutes().filter(a => a.children?.length);  
- const height = ref<number>(window.innerHeight - 30);
+ const height = ref<number>(window.innerHeight - 58);
  </script>
  
  <style scoped>
