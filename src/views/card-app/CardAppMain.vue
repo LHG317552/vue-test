@@ -1,6 +1,6 @@
 <template>
     <div class="wallet-container">
-      <header class="app-header">
+      <header class="app-header" v-if="!isEditMode">
         <div class="brand-lockup">
           <span @click="router.go(-1)">←</span>
           <span class="brand-mark">i</span><strong>카드앱</strong>
