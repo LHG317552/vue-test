@@ -5,9 +5,6 @@ export class AppRouter {
   private router: any = null;
   
   public lastSavedPosition: number = 0;
-  /* 'slide-left' | 'slide-right' | 'fade' */
-  public transitionName: Ref<string> = ref<string>('slide-left');
-  public menuSkip: boolean = false;
 
   private constructor() {}
 

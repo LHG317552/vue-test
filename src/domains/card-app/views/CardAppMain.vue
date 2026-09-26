@@ -72,7 +72,7 @@
   import { Pagination } from 'swiper/modules';
   import 'swiper/css';
   import 'swiper/css/pagination';
-  import StackedCardSlider from '../../components/card-app/StackedCardSlider.vue';
+  import StackedCardSlider from '../components/StackedCardSlider.vue';
   
   interface Card {
     id: number
