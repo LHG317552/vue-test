@@ -27,6 +27,15 @@ const router = createRouter({
       children: CardAppRouters,
     },    
   ],
+  scrollBehavior(to, from, savedPosition) {
+    // 뒤로가기 / 앞으로가기인 경우
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      // 일반 페이지 이동인 경우 최상단으로 이동
+      return { top: 0, left: 0 };
+    }
+  }
 });
 
 const isCardDomain = (to:TRouterTo, from: TRouterFrom) => {
