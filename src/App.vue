@@ -1,26 +1,8 @@
 <template>
-  <RouterView />
+  <router-view />    
 </template>
 
-<script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
-
-const route = useRoute()
-const routers = useRouter().getRoutes();
-</script>
-
 <style scoped>
-.router-guide {
-  display: grid;
-  min-height: 100svh;
-  padding: 24px;
-  place-items: center;
-  box-sizing: border-box;
-  background: linear-gradient(135deg, #f3f7ff 0%, #eef4ff 100%);
-  color: #1d2a44;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
 .guide-router {
   height: calc(100vh - 3rem);
   width: min(100%, 520px);

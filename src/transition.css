@@ -1,0 +1,61 @@
+/* ======================================================== */
+/* 🚀 덮어쓰기형 스택 3D 슬라이드 트랜지션 규격 */
+/* ======================================================== */
+.slide-left-enter-active,
+.slide-right-enter-active {
+  z-index: 2;
+}
+.slide-left-leave-active,
+.slide-right-leave-active {
+  z-index: 1;
+}
+
+/* 1. 메뉴 진입 (메인은 0 고정 대기, 메뉴판이 100%에서 밀고 들어옴) */
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-left-enter-from {
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-leave-to {
+  transform: translate3d(0, 0, 0); 
+}
+
+/* 2. 메뉴 뒤로가기 (밑에 있던 메인은 0 고정 대기, 메뉴판이 100%로 탈출) */
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-right-enter-from {
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-right-leave-to {
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-up-enter-from {
+  transform: translate3d(0, 100%, 0);
+}
+.slide-up-leave-to {
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-down-enter-from {
+  transform: translate3d(0, -100%, 0);
+}
+.slide-down-leave-to {
+  transform: translate3d(0, 0, 0);
+}
+
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.15s; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }

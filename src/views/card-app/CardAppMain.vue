@@ -1,89 +1,78 @@
 <template>
-    <div class="wallet-container">
-      <header class="app-header" v-if="!isEditMode">
-        <div class="brand-lockup">
-          <span @click="router.go(-1)">←</span>
-          <span class="brand-mark">i</span><strong>카드앱</strong>
+<!-- <transition appear :name="isEditMode ? 'slide-up' : 'slide-down'" :key="String(isEditMode)" mode="out-in">
+</transition>   -->
+<div class="card-app-main-container" :class="{'edit-mode': isEditMode}">
+  <section v-if="!isEditMode" class="welcome-section">
+    <p class="welcome-copy">오늘도 알뜰한 카드생활</p>
+    <div class="welcome-row"><h1>내 카드</h1><button class="wallet-link" type="button">카드 관리 <span>›</span></button></div>
+  </section>
+  <!-- 상단 헤더 -->
+  <div class="wallet-header">
+    <span class="header-title">{{ isEditMode ? '빠른 실행 편집' : '카드 스와이프' }}</span>
+    <button class="edit-toggle-btn" @click="toggleMode">
+      {{ isEditMode ? '완료' : '편집' }}
+    </button>
+  </div>
+
+  <!-- 1. 조회용 모드 (가로 Swiper) -->
+  <div v-if="!isEditMode" class="swiper-view-wrapper">
+    <Swiper
+      :slides-per-view="1"
+      :space-between="16"
+      :pagination="{ clickable: true }"
+      :modules="swiperModules"
+      class="card-swiper"
+    >
+      <SwiperSlide v-for="card in cards" :key="card.id">
+        <div class="pay-card" :style="{ background: card.gradient }">
+          <div class="card-brand">{{ card.brand }}</div>
+          <div class="card-number">•••• •••• •••• {{ card.lastFour }}</div>
         </div>
-        <div class="header-actions">
-          <button class="icon-button alarm-button" type="button" aria-label="알림"><img width="30px" src="../../assets/notice-alarm-bell.png" /><span class="notification-dot"></span></button>
-          <button class="icon-button" type="button" aria-label="전체 메뉴">☰</button>
-        </div>
-      </header>
-      <section v-if="!isEditMode" class="welcome-section">
-        <p class="welcome-copy">오늘도 알뜰한 카드생활</p>
-        <div class="welcome-row"><h1>내 카드</h1><button class="wallet-link" type="button">카드 관리 <span>›</span></button></div>
-      </section>
-      <!-- 상단 헤더 -->
-      <div class="wallet-header">
-        <span class="header-title">{{ isEditMode ? '빠른 실행 편집' : '카드 스와이프' }}</span>
-        <button class="edit-toggle-btn" @click="toggleMode">
-          {{ isEditMode ? '완료' : '편집' }}
-        </button>
+      </SwiperSlide>
+    </Swiper>
+  </div>
+
+  <!-- 2. 순서변경 모드 (세로 Stacked 롱프레스 드래그) -->
+  <StackedCardSlider v-else v-model="cards" :height="height" :card-height="200">
+    <template #default="{ card }">
+      <div class="pay-card" :style="{ background: card.gradient }">      
+        <div class="card-brand">{{ card.brand }}</div>
+        <div class="card-number">•••• {{ card.lastFour }}</div>
       </div>
-  
-      <!-- 1. 조회용 모드 (가로 Swiper) -->
-      <div v-if="!isEditMode" class="swiper-view-wrapper">
-        <Swiper
-          :slides-per-view="1"
-          :space-between="16"
-          :pagination="{ clickable: true }"
-          :modules="swiperModules"
-          class="card-swiper"
-        >
-          <SwiperSlide v-for="card in cards" :key="card.id">
-            <div class="pay-card" :style="{ background: card.gradient }">
-              <div class="card-brand">{{ card.brand }}</div>
-              <div class="card-number">•••• •••• •••• {{ card.lastFour }}</div>
-            </div>
-          </SwiperSlide>
-        </Swiper>
+    </template>
+  </StackedCardSlider>
+  <template v-if="!isEditMode">
+    <section class="benefit-summary">
+      <div><p>이번 달 카드 이용금액</p><strong>1,284,000<span>원</span></strong></div>
+      <button type="button" class="summary-arrow" aria-label="이용금액 상세보기">›</button>
+    </section>
+    <section class="quick-menu-section">
+      <h2>자주 찾는 메뉴</h2>
+      <div class="quick-menu-grid">
+        <button type="button"><span class="quick-icon icon-card">▰</span>이용내역</button>
+        <button type="button"><span class="quick-icon icon-pay">₩</span>즉시결제</button>
+        <button type="button"><span class="quick-icon icon-benefit">◎</span>혜택</button>
+        <button type="button"><span class="quick-icon icon-customer" @click="$vRouter.push({name: 'card/inquiry'})">?</span>고객센터</button>
       </div>
-  
-      <!-- 2. 순서변경 모드 (세로 Stacked 롱프레스 드래그) -->
-      <StackedCardSlider v-else v-model="cards" :height="height" :card-height="200">
-        <template #default="{ card }">
-          <div class="pay-card" :style="{ background: card.gradient }">      
-            <div class="card-brand">{{ card.brand }}</div>
-            <div class="card-number">•••• {{ card.lastFour }}</div>
-          </div>
-        </template>
-      </StackedCardSlider>
-      <template v-if="!isEditMode">
-        <section class="benefit-summary">
-          <div><p>이번 달 카드 이용금액</p><strong>1,284,000<span>원</span></strong></div>
-          <button type="button" class="summary-arrow" aria-label="이용금액 상세보기">›</button>
-        </section>
-        <section class="quick-menu-section">
-          <h2>자주 찾는 메뉴</h2>
-          <div class="quick-menu-grid">
-            <button type="button"><span class="quick-icon icon-card">▰</span>이용내역</button>
-            <button type="button"><span class="quick-icon icon-pay">₩</span>즉시결제</button>
-            <button type="button"><span class="quick-icon icon-benefit">◎</span>혜택</button>
-            <button type="button"><span class="quick-icon icon-customer">?</span>고객센터</button>
-          </div>
-        </section>
-        <section class="event-banner">
-          <div><span>카드 혜택</span><strong>나에게 딱 맞는<br />이번 달 혜택을 확인하세요</strong></div>
-          <span class="banner-card">카드앱</span>
-        </section>
-      </template>
-      <nav v-if="!isEditMode" class="bottom-nav" aria-label="하단 메뉴">
-        <button type="button" class="is-active"><span>⌂</span>홈</button><button type="button"><span>▣</span>금융</button><button type="button"><span>◈</span>혜택</button><button type="button"><span>♙</span>MY</button>
-      </nav>
-    </div>
+    </section>
+    <section class="event-banner">
+      <div><span>카드 혜택</span><strong>나에게 딱 맞는<br />이번 달 혜택을 확인하세요</strong></div>
+      <span class="banner-card">카드앱</span>
+    </section>
   </template>
+  <nav v-if="!isEditMode" class="bottom-nav" aria-label="하단 메뉴">
+    <button type="button" class="is-active"><span>⌂</span>홈</button><button type="button"><span>▣</span>금융</button><button type="button"><span>◈</span>혜택</button><button type="button"><span>♙</span>MY</button>
+  </nav>
+</div>
+</template>
   
-  <script setup lang="ts">
-  import { ref } from 'vue'
-  import { Swiper, SwiperSlide } from 'swiper/vue'
-  import { Pagination } from 'swiper/modules'
-  
-  import 'swiper/css'
-  import 'swiper/css/pagination'
-  import StackedCardSlider from '../../components/card-app/StackedCardSlider.vue'
-  import { useRouter } from 'vue-router'
-  
+<script setup lang="ts">
+  import { ref } from 'vue';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import { Pagination } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+  import StackedCardSlider from '../../components/card-app/StackedCardSlider.vue';
   
   interface Card {
     id: number
@@ -91,10 +80,10 @@
     lastFour: string
     gradient: string
   }
-  const router = useRouter();
+
   const height = ref<number>(window.innerHeight - 300);
-  const swiperModules = [Pagination]
-  const isEditMode = ref(false)
+  const swiperModules = [Pagination];
+  const isEditMode = ref<boolean>(false);
   
   // 삼성페이 느낌의 그라데이션 카드 데이터
   const cards = ref<Card[]>([
@@ -111,35 +100,10 @@
   }
   </script>
   
-  <style scoped>
-  :global(#app) {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    text-align: left;
-    border: none;
-    display: block;
-    min-height: 100svh;
-  }
-  
-  .wallet-container {
-    max-width: 480px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: #f5f7fb;
-    color: #191f28;
+  <style scoped>  
+  .card-app-main-container {
     padding: 0 20px 102px;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-y: auto;
   }
-  
-  .app-header { height: 66px; display: flex; align-items: center; justify-content: space-between; }
-  .brand-lockup { display: flex; gap: 6px; align-items: center; color: #123f9b; font-size: 18px; letter-spacing: -1px; }
-  .brand-mark { width: 21px; height: 21px; display: grid; place-items: center; border-radius: 7px 7px 7px 2px; background: #1755be; color: #fff; font-family: Georgia, serif; font-weight: 700; font-size: 18px; line-height: 1; }
-  .header-actions { display: flex; gap: 4px; }
-  .icon-button { position: relative; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: #273242; font-size: 20px; cursor: pointer; }
-  .notification-dot { position: absolute; top: 20px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: #f04a43; }
   .welcome-section { padding: 14px 2px 2px; }
   .welcome-copy { margin: 0 0 4px; color: #697586; font-size: 13px; }
   .welcome-row { display: flex; align-items: center; justify-content: space-between; }
@@ -222,7 +186,6 @@
   .banner-card { display: grid !important; place-items: center; width: 68px; height: 44px; margin: 0 !important; border-radius: 8px; background: linear-gradient(135deg, #7dd0f3, #d5f0f9); color: #135094 !important; font-size: 15px !important; font-weight: 800; transform: rotate(-12deg); }
   .bottom-nav { position: fixed; z-index: 10; bottom: 0; left: 50%; display: flex; width: min(480px, 100%); height: 72px; padding: 9px 20px 8px; box-sizing: border-box; justify-content: space-between; transform: translateX(-50%); border-top: 1px solid #edf0f5; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); }
   .bottom-nav button { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 45px; border: 0; background: transparent; color: #8b95a4; font-size: 10px; cursor: pointer; }.bottom-nav span { font-size: 21px; line-height: 23px; }.bottom-nav .is-active { color: #1958be; font-weight: 700; }
-  .alarm-button { display: flex; align-items: end;}
-  
+  .edit-mode { position: fixed; width: 100%; top: 0; z-index: 200000; background: white; }
   </style>
   
