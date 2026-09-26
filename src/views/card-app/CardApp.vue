@@ -12,12 +12,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import CardAppHeader from '../../components/card-app/CardAppHeader.vue';
 
 const transitionName = computed<string>(() => $vRouter.transitionName.value);
 
 // watch(transitionName, (val) => {console.log(val)}, {deep: true, immediate: true});
+
+const onPopState = () => {  
+  if (window.history.state.forward === '/card/menu') {
+    $vRouter.menuSkip = true;
+  }  
+}
+onMounted(() => {
+  window.addEventListener('popstate', onPopState);
+});
+onUnmounted(() => {
+  window.addEventListener('popstate', onPopState);
+});
 </script>
 
 <style scoped>

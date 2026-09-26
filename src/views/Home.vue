@@ -9,7 +9,8 @@
   
         <nav class="page-list" aria-label="페이지 목록" v-for="router in routers">
           <a @click="$vRouter.push({name: router.name})" class="page-link">
-            <span class="page-icon" aria-hidden="true">▣</span>
+            <CreditCard aria-hidden="true" v-if="router.path.includes('card')" />
+            <span class="page-icon" aria-hidden="true" v-else />
             <span>
               <strong v-text="router.meta.title" />
               <small>{{ router.path }} · {{ router.meta.desc }}</small>
@@ -23,7 +24,8 @@
   
 <script setup lang="ts">
 import { ref } from 'vue';
-import {  useRouter } from 'vue-router'
+import {  useRouter } from 'vue-router';
+import { CreditCard } from '@lucide/vue';
     
 const routers = useRouter().getRoutes().filter(a => a.children?.length);  
 const height = ref<number>(window.innerHeight);

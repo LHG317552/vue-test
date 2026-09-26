@@ -62,9 +62,6 @@ export class AppRouter {
   // 3. goBack 메서드 (이전 페이지로 이동)
   public goBack = (): void => {    
     this.transitionName.value = 'slide-right';    
-    if (window.history.state.current === '/card/menu') {
-      this.menuSkip = true;
-    }
     if (typeof this.router.back === 'function') {
       this.router.back(); // Vue Router v4 기준
     } else if (typeof this.router.go === 'function') {
