@@ -12,6 +12,8 @@ import CreditCardApply from '../views/card-app/apply/CreditCardApply.vue';
 import CheckCardApply from '../views/card-app/apply/CheckCardApply.vue';
 import DeliveryStatus from '../views/card-app/apply/DeliveryStatus.vue';
 
+import { CreditCard } from '@lucide/vue';
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -24,8 +26,8 @@ const router = createRouter({
     {
       path: '/card',
       name: 'card',
-      component: CardApp,
-      meta: { title: '카드앱', desc: '금융권 카드앱 샘플페이지' }, 
+      component: CardApp,      
+      meta: { title: '카드앱', desc: '금융권 카드앱 샘플페이지', icon: CreditCard, }, 
       redirect: { name: 'card/main' },
       children: [
         {
@@ -89,10 +91,40 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, _, next) => {  
-  if (to.name === 'card/menu' && $vRouter.menuSkip) {
-    $vRouter.goBack();
-    return;
+router.afterEach(() => {
+  $vRouter.lastSavedPosition = window.history.state?.position || 0;
+})
+
+router.beforeEach((to, from, next) => { 
+  if (to.name === 'home') {
+    $vRouter.transitionName.value = 'fade';
+  } else {
+    const currentBrowserPosition = window.history.state?.position || 0;  
+    if (currentBrowserPosition < $vRouter.lastSavedPosition) {
+      $vRouter.transitionName.value = 'slide-right';
+      if (to.name === 'card/menu') {
+        // 메뉴로 뒤로가기
+        if ($vRouter.menuSkip) {
+          $vRouter.goBack();
+          return;
+        } else {
+          // 제일 최근 메뉴로 뒤로가기
+        }
+      } else if (from.name === 'card/menu') {
+        // 메뉴에서부터 뒤로가기
+        $vRouter.menuSkip = true;
+      } else {
+        // 메뉴가 아닌 뒤로가기
+      }
+    } else {      
+      $vRouter.transitionName.value = 'slide-left';
+      if (to.name === 'card/menu') {
+        // 메뉴로 router 진입
+        $vRouter.menuSkip = false;
+      } else {
+       // 메뉴가 아닌 곳으로 router 진입
+      }
+    }
   }
   next();
 });
