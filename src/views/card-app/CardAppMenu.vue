@@ -121,7 +121,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ChevronRight, Settings, X } from 'lucide-vue-next'
+import { ChevronRight, Settings, X } from '@lucide/vue'
   
 const ChevronRightIcon = ChevronRight;
 const SettingsIcon = Settings;

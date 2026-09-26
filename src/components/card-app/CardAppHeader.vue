@@ -15,7 +15,7 @@
     </header>
 </template>
 <script lang="ts" setup>
-import { Bell, ArrowLeft } from 'lucide-vue-next'
+import { Bell, ArrowLeft } from '@lucide/vue'
 </script>
 <style lang="css" scoped>
 .app-header { 
