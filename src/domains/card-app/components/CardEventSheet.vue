@@ -1,15 +1,5 @@
 <template>
-  <v-sheet class="event-sheet" rounded="t-xl">
-    <div class="drag-handle" />
-
-    <!-- 배너 -->
-    <div class="banner">
-      <span class="period-chip">{{ period }}</span>
-      <p class="banner-headline">{{ headline }}</p>
-      <p class="banner-sub">{{ subline }}</p>
-    </div>
-
-    <!-- 본문 -->
+  <div class="bottomsheet-body">
     <div class="content">
       <ul class="benefit-list">
         <li v-for="(benefit, i) in benefits" :key="i" class="benefit-row">
@@ -17,10 +7,8 @@
           <span class="benefit-amount">{{ benefit.amount }}</span>
         </li>
       </ul>
-
       <p class="fine-print">{{ finePrint }}</p>
     </div>
-
     <!-- 하단 액션 -->
     <div class="actions">
       <v-btn
@@ -38,7 +26,7 @@
         다음에 볼게요
       </button>
     </div>
-  </v-sheet>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -71,31 +59,6 @@ defineEmits<{
 </script>
 
 <style scoped>
-.event-sheet {
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.drag-handle {
-  width: 36px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(23, 23, 31, 0.16);
-  margin: 12px auto 0;
-}
-
-/* 배너: 카드 모서리를 연상시키는 대각선 그라디언트 */
-.banner {
-  position: relative;
-  margin: 16px 20px 0;
-  padding: 24px 20px 28px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #3d2fe0 0%, #5b3ff0 55%, #e8a33d 130%);
-  color: #ffffff;
-  overflow: hidden;
-}
-
 .period-chip {
   display: inline-block;
   padding: 4px 10px;
@@ -106,23 +69,8 @@ defineEmits<{
   letter-spacing: 0.2px;
 }
 
-.banner-headline {
-  margin: 14px 0 4px;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.banner-sub {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.86);
-  line-height: 1.5;
-}
-
 .content {
-  padding: 20px 20px 4px;
+  padding: 0 20px;
 }
 
 .benefit-list {

@@ -45,6 +45,9 @@ const lucideIconSet: IconSet = {
 }
 
 export default createVuetify({
+  theme: {
+    defaultTheme: 'light' // 👈 여기에 'light'를 명시적으로 지정합니다.
+  },
   icons: {
     // 1. 기본 아이콘 인터페이스를 커스텀 정의한 'lucide' 세트로 지정합니다.
     defaultSet: 'lucide',

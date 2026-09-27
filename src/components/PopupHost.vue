@@ -6,15 +6,20 @@
         :model-value="true"
         @update:model-value="(v) => !v && dismiss(popup)"
       >
-        <component
-          :is="popup.target"
-          v-if="isComponent(popup.target)"
-          v-bind="popup.props"
-          @close="(result: any) => close(popup, result)"
-        />
-        <v-card v-else>
-          <v-card-text>{{ popup.target }}</v-card-text>
-        </v-card>
+        <v-sheet rounded="t-xl">
+          <div class="d-flex justify-end mt-3 mx-3">        
+            <X @click="close(popup, false)" class="cursor-pointer" />
+          </div>
+          <component
+            :is="popup.target"
+            v-if="isComponent(popup.target)"
+            v-bind="popup.props"
+            @close="(result: any) => close(popup, result)"
+          />
+          <v-card v-else>
+            <v-card-text>{{ popup.target }}</v-card-text>
+          </v-card>
+        </v-sheet>
       </v-bottom-sheet>
   
       <!-- alert / confirm / dialog -->
@@ -54,6 +59,7 @@
   
   <script setup lang="ts">
   import { type Component } from "vue";
+  import { X } from '@lucide/vue';
   
   function isComponent(target: unknown): target is Component {
     return typeof target !== "string";

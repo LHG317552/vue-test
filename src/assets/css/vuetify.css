@@ -2,3 +2,7 @@
   opacity: 0.32 !important;
   background: transparent;
 }
+
+.v-bottom-sheet > .v-bottom-sheet__content.v-overlay__content {
+  box-shadow: none !important;
+}

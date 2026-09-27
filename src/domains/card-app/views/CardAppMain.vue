@@ -102,21 +102,21 @@ import CardEventSheet from '../components/CardEventSheet.vue';
   }
   
   afterEnterTransition(() => {   
-    $ui.alert('팝업테스트');
-  //  let storage = JSON.parse(localStorage.getItem('no-popup-show') || '{}');    
-  //  if (!storage['CardEventSheet']) {
-  //    $ui.bottomsheet(CardEventSheet, {
-  //       props: {
-  //         headline: "가입 첫달 무료",
-  //         benefits: [{ label: "연회비 캐시백", amount: "20,000원" }],
-  //       },
-  //     }).then(result => {
-  //       if (result === 'dismiss') {                
-  //         storage['CardEventSheet'] = true;
-  //         localStorage.setItem('no-popup-show', storage['CardEventSheet']);
-  //       }
-  //     }); 
-  //   }
+    // $ui.alert('팝업테스트');
+    let storage = JSON.parse(localStorage.getItem('no-popup-show') || '{}');    
+    if (!storage['CardEventSheet']) {
+      $ui.bottomsheet(CardEventSheet, {
+         props: {
+           headline: "가입 첫달 무료",
+           benefits: [{ label: "연회비 캐시백", amount: "20,000원" }],
+         },
+       }).then(result => {
+         if (result === 'dismiss') {                
+           storage['CardEventSheet'] = true;
+           localStorage.setItem('no-popup-show', storage['CardEventSheet']);
+         }
+       }); 
+     }
   });
 
   </script>
