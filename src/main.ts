@@ -1,11 +1,13 @@
 import { createApp } from 'vue';
 import './assets/css/style.css';
 import './assets/css/transition.css';
+import './assets/css/vuetify.css';
 import App from './App.vue';
 import router from './router';
 import { vRouter } from './global-utils/app-router';
 import { ui } from './global-utils/ui';
 import { cardApp } from './global-utils/card-app';
+import vuetify from './plugins/vuetify';
 
 const app = createApp(App);
 
@@ -18,4 +20,4 @@ app.config.globalProperties.$vRouter = vRouter;
 app.config.globalProperties.$ui = ui;
 app.config.globalProperties.$cardApp = cardApp;
 
-app.use(router).mount('#app');
+app.use(router).use(vuetify).mount('#app');

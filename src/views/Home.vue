@@ -43,7 +43,7 @@ const height = ref<number>(window.innerHeight);
  
  .guide-router {
    height: 100vh;
-   width: min(100%, 520px);
+   width: 100%;
    padding: 24px;
    border: 1px solid #dfe8fa;
    /* border-radius: 24px; */

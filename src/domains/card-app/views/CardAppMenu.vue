@@ -1,6 +1,6 @@
 <template>
   <!-- 모바일 기기 프레임 크기 고정 (리스트 확인용) -->
-  <div class="card-menu max-w-md w-full bg-slate-100 min-h-screen flex justify-center items-start font-sans antialiased">
+  <div class="card-menu w-full bg-slate-100 min-h-screen flex justify-center items-start font-sans antialiased">
     <!-- 전체메뉴 사이드바 본체 -->      
     <aside class="w-full bg-[#f8fafc] shadow-lg overflow-hidden flex flex-col h-[100vh] border border-slate-200">
       <!-- 1. 유저 프로필 및 정보 영역 -->

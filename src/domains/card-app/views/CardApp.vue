@@ -1,7 +1,7 @@
 <template>
   <div class="wallet-container">    
     <router-view v-slot="{ Component, route: localRoute }">               
-      <transition :name="transitionName" appear mode="out-in" :key="localRoute.fullPath">
+      <transition :name="transitionName" appear mode="out-in" :key="localRoute.fullPath" @after-enter="handleAfterEnter">
         <div class="router-view-area"  >
           <card-app-header />
           <component :is="Component" />
@@ -12,9 +12,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, provide, ref } from 'vue';
 import CardAppHeader from '../components/CardAppHeader.vue';
 const transitionName = computed<string>(() => $cardApp.transitionName.value);
+
+// 💡 트랜지션 완료 여부를 트리거할 ref 선언
+const transitionTrigger = ref<number>(0);
+provide('pageTransitionTrigger', transitionTrigger);
+
+const handleAfterEnter = () => {
+  // 트랜지션이 끝날 때마다 값을 변경하여 자식들에게 알림
+  transitionTrigger.value += 1;
+};
 </script>
 
 <style scoped>
@@ -29,7 +38,7 @@ const transitionName = computed<string>(() => $cardApp.transitionName.value);
 }
 
 .wallet-container {
-  max-width: 480px;
+  width: 100%;  
   margin: 0 auto;
   min-height: 100vh;
   background: #f5f7fb;

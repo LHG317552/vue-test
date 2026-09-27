@@ -73,6 +73,8 @@
   import 'swiper/css';
   import 'swiper/css/pagination';
   import StackedCardSlider from '../components/StackedCardSlider.vue';
+import { afterEnterTransition } from '../../../global-utils/ui.js';
+import CardEventSheet from '../components/CardEventSheet.vue';
   
   interface Card {
     id: number
@@ -98,6 +100,25 @@
   const toggleMode = () => {
     isEditMode.value = !isEditMode.value;  
   }
+  
+  afterEnterTransition(() => {   
+    $ui.alert('팝업테스트');
+  //  let storage = JSON.parse(localStorage.getItem('no-popup-show') || '{}');    
+  //  if (!storage['CardEventSheet']) {
+  //    $ui.bottomsheet(CardEventSheet, {
+  //       props: {
+  //         headline: "가입 첫달 무료",
+  //         benefits: [{ label: "연회비 캐시백", amount: "20,000원" }],
+  //       },
+  //     }).then(result => {
+  //       if (result === 'dismiss') {                
+  //         storage['CardEventSheet'] = true;
+  //         localStorage.setItem('no-popup-show', storage['CardEventSheet']);
+  //       }
+  //     }); 
+  //   }
+  });
+
   </script>
   
   <style scoped>  
@@ -184,7 +205,7 @@
   .event-banner { display: flex; justify-content: space-between; align-items: center; min-height: 96px; padding: 0 19px; border-radius: 18px; background: linear-gradient(110deg, #183d8d, #2867ca); color: #fff; overflow: hidden; }
   .event-banner span { display: block; margin-bottom: 6px; color: #bcd7ff; font-size: 12px; }.event-banner strong { font-size: 16px; line-height: 1.35; letter-spacing: -.7px; }
   .banner-card { display: grid !important; place-items: center; width: 68px; height: 44px; margin: 0 !important; border-radius: 8px; background: linear-gradient(135deg, #7dd0f3, #d5f0f9); color: #135094 !important; font-size: 15px !important; font-weight: 800; transform: rotate(-12deg); }
-  .bottom-nav { position: fixed; z-index: 10; bottom: 0; left: 50%; display: flex; width: min(480px, 100%); height: 72px; padding: 9px 20px 8px; box-sizing: border-box; justify-content: space-between; transform: translateX(-50%); border-top: 1px solid #edf0f5; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); }
+  .bottom-nav { position: fixed; z-index: 10; bottom: 0; left: 50%; display: flex; width: 100%; height: 72px; padding: 9px 20px 8px; box-sizing: border-box; justify-content: space-between; transform: translateX(-50%); border-top: 1px solid #edf0f5; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); }
   .bottom-nav button { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 45px; border: 0; background: transparent; color: #8b95a4; font-size: 10px; cursor: pointer; }.bottom-nav span { font-size: 21px; line-height: 23px; }.bottom-nav .is-active { color: #1958be; font-weight: 700; }
   .edit-mode { position: fixed; width: 100%; top: 0; z-index: 200000; background: white; }
   </style>

@@ -1,0 +1,4 @@
+.v-overlay__scrim {
+  opacity: 0.32 !important;
+  background: transparent;
+}

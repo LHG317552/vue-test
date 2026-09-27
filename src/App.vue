@@ -1,11 +1,19 @@
 <template>
-  <router-view />    
+  <v-app>
+    <router-view />
+    <PopupHost />
+  </v-app>
 </template>
+
+<script setup lang="ts">
+import PopupHost from './components/PopupHost.vue';
+
+</script>
 
 <style scoped>
 .guide-router {
   height: calc(100vh - 3rem);
-  width: min(100%, 520px);
+  width: 00%;
   padding: 38px;
   border: 1px solid #dfe8fa;
   border-radius: 24px;
