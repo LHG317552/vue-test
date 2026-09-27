@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import '../../../assets/css/card-app-vuetify.css';
 import { computed, provide, ref } from 'vue';
 import CardAppHeader from '../components/CardAppHeader.vue';
 const transitionName = computed<string>(() => $cardApp.transitionName.value);

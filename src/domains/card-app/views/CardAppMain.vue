@@ -67,12 +67,10 @@
 </template>
   
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { Pagination } from 'swiper/modules';
-  import 'swiper/css';
-  import 'swiper/css/pagination';
-  import StackedCardSlider from '../components/StackedCardSlider.vue';
+import { ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination } from 'swiper/modules';
+import StackedCardSlider from '../components/StackedCardSlider.vue';
 import { afterEnterTransition } from '../../../global-utils/ui.js';
 import CardEventSheet from '../components/CardEventSheet.vue';
   

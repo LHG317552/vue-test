@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import './assets/css/style.css';
 import './assets/css/transition.css';
-import './assets/css/vuetify.css';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import App from './App.vue';
 import router from './router';
 import { vRouter } from './global-utils/app-router';
