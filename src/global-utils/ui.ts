@@ -87,7 +87,7 @@ export class UI {
 
     const popup = this.popupQueue.value[index];
     // 여기도 shallowRef라 mutation 대신 새 배열로 교체
-    this.popupQueue.value = this.popupQueue.value.filter((_, i) => i !== index);
+    this.popupQueue.value = this.popupQueue.value.filter((_, i) => i !== index);    
     popup.resolve(closeValue);
   }
 
@@ -104,7 +104,7 @@ export class UI {
   }
 
   private call<T>(type: TPopType, target: TOpenTarget | TCloseSignal<T>, params?: TParams): Promise<T | undefined> {
-    if (isCloseSignal(target)) {
+    if (isCloseSignal(target)) {      
       this.close<T>(type, target);
       return Promise.resolve(undefined); // 닫기 호출 자체의 반환값은 의미가 없으므로 명확히 undefined
     }

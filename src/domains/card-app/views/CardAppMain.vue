@@ -49,10 +49,10 @@
     <section class="quick-menu-section">
       <h2>자주 찾는 메뉴</h2>
       <div class="quick-menu-grid">
-        <button type="button"><span class="quick-icon icon-card">▰</span>이용내역</button>
-        <button type="button"><span class="quick-icon icon-pay">₩</span>즉시결제</button>
-        <button type="button"><span class="quick-icon icon-benefit">◎</span>혜택</button>
-        <button type="button"><span class="quick-icon icon-customer" @click="$vRouter.push({name: 'card/inquiry'})">?</span>고객센터</button>
+        <button type="button"><FileText class="w-6 h-6" />이용내역</button>
+        <button type="button"><CreditCard class="w-6 h-6" />즉시결제</button>
+        <button type="button"><Gift class="w-6 h-6" />혜택</button>
+        <button type="button"><HelpCircle class="w-6 h-6" @click="$vRouter.push({name: 'card/inquiry'})" />고객센터</button>
       </div>
     </section>
     <section class="event-banner">
@@ -61,7 +61,10 @@
     </section>
   </template>
   <nav v-if="!isEditMode" class="bottom-nav" aria-label="하단 메뉴">
-    <button type="button" class="is-active"><span>⌂</span>홈</button><button type="button"><span>▣</span>금융</button><button type="button"><span>◈</span>혜택</button><button type="button"><span>♙</span>MY</button>
+    <button type="button" :class="{'is-active': activeBottomNav === 'home'}" aria-current="page" @click="setActiveBottomNav('home')"><Home class="w-6 h-6" />홈</button>
+    <button type="button" :class="{'is-active': activeBottomNav === 'finance'}" aria-current="page" @click="setActiveBottomNav('finance')"><Banknote class="w-6 h-6" />금융</button>
+    <button type="button" :class="{'is-active': activeBottomNav === 'benefit'}" aria-current="page" @click="setActiveBottomNav('benefit')"><Gift class="w-6 h-6" />혜택</button>
+    <button type="button" :class="{'is-active': activeBottomNav === 'my'}" aria-current="page" @click="setActiveBottomNav('my')"><User class="w-6 h-6" />MY</button>
   </nav>
 </div>
 </template>
@@ -72,7 +75,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination } from 'swiper/modules';
 import StackedCardSlider from '../components/StackedCardSlider.vue';
 import { afterEnterTransition } from '../../../global-utils/ui.js';
-import CardEventSheet from '../components/CardEventSheet.vue';
+import { Home, Banknote, Gift, User, FileText, CreditCard, HelpCircle } from '@lucide/vue';
+// import CardEventSheet from '../components/CardEventSheet.vue';
   
   interface Card {
     id: number
@@ -100,22 +104,29 @@ import CardEventSheet from '../components/CardEventSheet.vue';
   }
   
   afterEnterTransition(() => {   
-    // $ui.alert('팝업테스트');
-    let storage = JSON.parse(localStorage.getItem('no-popup-show') || '{}');    
-    if (!storage['CardEventSheet']) {
-      $ui.bottomsheet(CardEventSheet, {
-         props: {
-           headline: "가입 첫달 무료",
-           benefits: [{ label: "연회비 캐시백", amount: "20,000원" }],
-         },
-       }).then(result => {
-         if (result === 'dismiss') {                
-           storage['CardEventSheet'] = true;
-           localStorage.setItem('no-popup-show', storage['CardEventSheet']);
-         }
-       }); 
-     }
+    // $ui.alert('팝업테스트');    
+    // let storage = JSON.parse(localStorage.getItem('no-popup-show') || '{}');    
+    // if (!storage['CardEventSheet']) {
+    //   $ui.bottomsheet(CardEventSheet, {
+    //      props: {
+    //        headline: "가입 첫달 무료",
+    //        benefits: [{ label: "연회비 캐시백", amount: "20,000원" }],
+    //      },
+    //    }).then(result => {
+    //     console.log(result);
+    //      if (result === 'dismiss') {                
+    //        storage['CardEventSheet'] = true;
+    //        localStorage.setItem('no-popup-show', JSON.stringify(storage));
+    //      }
+    //    }); 
+    //  }
   });
+
+  const activeBottomNav = ref<string>('home');
+  const setActiveBottomNav = (value: string) => {
+    activeBottomNav.value = value;
+  }
+  setActiveBottomNav('home');
 
   </script>
   
@@ -167,7 +178,7 @@ import CardEventSheet from '../components/CardEventSheet.vue';
   .pay-card {
     height: 200px;
     border-radius: 20px;
-    padding: 24px;
+    padding: 30px;
     position: relative;
     box-sizing: border-box;
     box-shadow: 0 11px 22px rgba(28, 50, 92, 0.18);
@@ -195,7 +206,7 @@ import CardEventSheet from '../components/CardEventSheet.vue';
   .benefit-summary strong span { margin-left: 2px; font-size: 14px; font-weight: 600; }
   .summary-arrow { border: 0; background: transparent; color: #8c96a5; font-size: 28px; cursor: pointer; }
   .quick-menu-section { margin-bottom: 24px; }
-  .quick-menu-section h2 { margin: 0 0 14px; font-size: 17px; letter-spacing: -.8px; }
+  .quick-menu-section h2 { margin: 0 0 28px; font-size: 19px; letter-spacing: -.8px; }
   .quick-menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .quick-menu-grid button { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent; color: #3e4857; font-size: 12px; cursor: pointer; }
   .quick-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 16px; font-size: 21px; font-weight: 700; }

@@ -2,7 +2,7 @@
   <div class="wallet-container">    
     <router-view v-slot="{ Component, route: localRoute }">               
       <transition :name="transitionName" appear mode="out-in" :key="localRoute.fullPath" @after-enter="handleAfterEnter">
-        <div class="router-view-area"  >
+        <div class="router-view-area">
           <card-app-header />
           <component :is="Component" />
         </div>
